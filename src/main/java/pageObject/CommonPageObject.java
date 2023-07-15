@@ -1,5 +1,6 @@
 package pageObject;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +13,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CommonPageObject {
     public static WebDriver edriver;
@@ -32,10 +35,36 @@ public class CommonPageObject {
     @FindBy(how = How.XPATH, using = "//button[@class='sc-11uohgb-5 gBQuHE']")
     public WebElement DeleteAll;
 
-    @FindBy(how = How.XPATH, using = "//span[@class=\"checkmark\"]")
+
+    @FindBy(how = How.XPATH, using = "//span[@class='checkmark']")
+    public WebElement DeleteXl;
+    //button Size ML
+    @FindBy(how = How.XPATH, using = "//span[@class='checkmark']")
     public List<WebElement> typeButtons;
-    @FindBy(how = How.XPATH, using = " //main[@class=\"sc-ebmerl-4 iliWeY\"]/p")
-    public WebElement numberProduct;
+    // chọn áo đầu tiền ML
+    @FindBy(how = How.XPATH, using = "//button[@class='sc-124al1g-0 jCsgpZ']")
+    public WebElement AddML;
+
+    @FindBy(how = How.XPATH, using = "//button[@class='sc-11uohgb-6 cgtUCJ']")
+    public List<WebElement> typeButtonAdds;
+
+    //check giá
+    @FindBy(how = How.XPATH, using = "//p[@class='sc-11uohgb-3 gKtloF']")
+    public List<WebElement> soluong;
+
+
+    @FindBy(how = How.XPATH, using = "//div[@class='sc-11uohgb-4 bnZqjD']")
+    public List<WebElement> Giatri;
+
+    @FindBy(how = How.XPATH, using = "//p[@class='sc-1h98xa9-9 jzywDV']")
+    public WebElement Tongsp;
+
+
+
+
+
+
+
 
     public CommonPageObject(WebDriver driver) throws Exception {
         edriver = new ChromeDriver();
@@ -92,5 +121,22 @@ public class CommonPageObject {
                     throw se;
             }
         }
+    }
+
+    public void checkGiatri(WebElement tong , List<WebElement> soluong , List<WebElement> Giatri) {
+        Float tongs = Float.parseFloat(tong.getText().replace("$ ",""));
+        ArrayList<Float> soluongs = new ArrayList<Float>();
+        ArrayList<Float> Giatris = new ArrayList<Float>();
+        for (int i = 0; i < soluong.size(); i++){
+            Giatris.add(Float.parseFloat(Giatri.get(i).getText().replace("$ ","").replace("-+","")));
+            soluongs.add((float) soluong.get(i).getText().charAt(soluong.get(i).getText().length() -1) -'0');
+        }
+        try {
+            Assert.assertEquals(Optional.of(tongs),Optional.of(soluongs.get(0)*Giatris.get(0)+soluongs.get(1)*Giatris.get(1)));
+            System.out.println("True");
+        }catch (Exception err) {
+            System.out.println("False");
+        }
+
     }
 }

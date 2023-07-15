@@ -1,5 +1,6 @@
 package org.example;
 
+import org.apache.poi.poifs.filesystem.NDocumentInputStream;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -65,26 +66,33 @@ public class testCase extends CommonPageObject {
         waitUntilElementClickable(closeButton);
         clickButton(closeButton,1);
 
-//        Test case 5
+        //Testcase2
+        //Delete XL
+        clickButton(DeleteXl,1);
+        System.out.println("Delete XL");
+        waitUntilInvisibilityOfElementLocated();
+
+        //ADDML
+        clickButton(typeButtons.get(3), 1);
+        System.out.println("Add ML");
+        waitUntilInvisibilityOfElementLocated();
+
+        // ADD áo ML
+        clickButton(AddML, 1);
+        System.out.println("Add ao ML");
+        waitUntilInvisibilityOfElementLocated();
         Thread.sleep(2000);
-//        close size XL
-        clickButton(typeButton,1);
-        System.out.println();
-        clickButton(typeButtons.get(3),1);
-        Thread.sleep(2000);
-//        choise all size
-        System.out.println(numberProduct.getText());
-        for (int i = 0; i<typeButtons.toArray().length;i++){
-            waitUntilElementVisible(typeButtons.get(i));
-            waitUntilElementClickable(typeButtons.get(i));
-            clickButton(typeButtons.get(i),1);
-            waitUntilInvisibilityOfElementLocated();
-        }
+        // add số lượng
+        waitUntilElementVisible(typeButtonAdds.get(3));
+        waitUntilElementClickable(typeButtonAdds.get(3));
+        clickButton(typeButtonAdds.get(3),1);
+        System.out.println("Add So luong");
+
+        //lay so luong
+        System.out.println("kiem tra tong tien");
+        checkGiatri(Tongsp, soluong, Giatri);
 
 
-//        System.out.println("Số lượng sản phẩm cần check"dataField.getData(0,1));x
-//        System.out.println("Số lượng sản phẩm sau khi chọn tất cả size:"+numberProduct.getText());
-//        Assert.assertEquals(dataField.getData(0,3),numberProduct.getText());
 
 
     }
