@@ -1,5 +1,6 @@
 package org.example;
 
+import org.apache.poi.poifs.filesystem.NDocumentInputStream;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -65,6 +66,31 @@ public class testCase extends CommonPageObject {
         waitUntilElementClickable(closeButton);
         clickButton(closeButton,1);
 
+        //Testcase2
+        //Delete XL
+        clickButton(DeleteXl,1);
+        System.out.println("Delete XL");
+        waitUntilInvisibilityOfElementLocated();
+
+        //ADDML
+        clickButton(typeButtons.get(3), 1);
+        System.out.println("Add ML");
+        waitUntilInvisibilityOfElementLocated();
+
+        // ADD áo ML
+        clickButton(AddML, 1);
+        System.out.println("Add ao ML");
+        waitUntilInvisibilityOfElementLocated();
+        Thread.sleep(2000);
+        // add số lượng
+        waitUntilElementVisible(typeButtonAdds.get(3));
+        waitUntilElementClickable(typeButtonAdds.get(3));
+        clickButton(typeButtonAdds.get(3),1);
+        System.out.println("Add So luong");
+
+        //lay so luong
+        System.out.println("kiem tra tong tien");
+        checkGiatri(Tongsp, soluong, Giatri);
 //        Test case 4
         Thread.sleep(2000);
 //        close size XL
@@ -110,7 +136,6 @@ public class testCase extends CommonPageObject {
         }catch(Exception err) {
             System.out.println("Sai, số lượng sản phẩm không đúng khi chọn tất cả các size");
         }
-
 
 
 
