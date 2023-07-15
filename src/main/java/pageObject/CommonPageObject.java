@@ -44,6 +44,9 @@ public class CommonPageObject {
     //button Size ML
     @FindBy(how = How.XPATH, using = "//span[@class='checkmark']")
     public List<WebElement> typeButtons;
+    @FindBy(how = How.XPATH, using = "//main[@class='sc-ebmerl-4 iliWeY']//p")
+    public WebElement numberProduct;
+
     // chọn áo đầu tiền ML
     @FindBy(how = How.XPATH, using = "//button[@class='sc-124al1g-0 jCsgpZ']")
     public WebElement AddML;
