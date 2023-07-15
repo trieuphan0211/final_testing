@@ -65,12 +65,31 @@ public class testCase extends CommonPageObject {
         waitUntilElementClickable(closeButton);
         clickButton(closeButton,1);
 
-//        Test case 5
+//        Test case 4
         Thread.sleep(2000);
 //        close size XL
-        clickButton(typeButton,1);
-        System.out.println();
-        clickButton(typeButtons.get(3),1);
+//        clickButton(typeButton,1);
+//        waitUntilInvisibilityOfElementLocated();
+        edriver.navigate().refresh();
+        waitUntilInvisibilityOfElementLocated();
+//        Chọn Size L
+        Thread.sleep(3000);
+        waitUntilElementVisible(typeButtons.get(4));
+        waitUntilElementClickable(typeButtons.get(4));
+        clickButton(typeButtons.get(4),1);
+        waitUntilInvisibilityOfElementLocated();
+//        add 2 product
+        waitUntilElementVisible(addProducts.get(0));
+        waitUntilElementClickable(addProducts.get(0));
+        clickButton(addProducts.get(0),1);
+        waitUntilElementVisible(addProducts.get(1));
+        waitUntilElementClickable(addProducts.get(1));
+        clickButton(addProducts.get(1),1);
+        checkcartSubtotal(subTotal,coin,numberCoin,2);
+        clickButton(typeButtons.get(4),1);
+        waitUntilInvisibilityOfElementLocated();
+//        Test case 5
+
         Thread.sleep(2000);
 //        choise all size
         System.out.println(numberProduct.getText());
@@ -82,9 +101,18 @@ public class testCase extends CommonPageObject {
         }
 
 
-//        System.out.println("Số lượng sản phẩm cần check"dataField.getData(0,1));x
-//        System.out.println("Số lượng sản phẩm sau khi chọn tất cả size:"+numberProduct.getText());
-//        Assert.assertEquals(dataField.getData(0,3),numberProduct.getText());
+        System.out.println("Số lượng sản phẩm cần check: "+dataField.getData(0,1));
+        System.out.println(1*1.12);
+        System.out.println("Số lượng sản phẩm sau khi chọn tất cả size: "+numberProduct.getText());
+        try {
+            Assert.assertEquals(dataField.getData(0,1),numberProduct.getText());
+            System.out.println("Đúng, số lượng sản phẩm đúng khi chọn tất cả các size");
+        }catch(Exception err) {
+            System.out.println("Sai, số lượng sản phẩm không đúng khi chọn tất cả các size");
+        }
+
+
+
 
 
     }
