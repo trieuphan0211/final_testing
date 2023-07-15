@@ -1,6 +1,7 @@
 package org.example;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
@@ -15,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObject.CommonPageObject;
+import pageObject.DataField;
 
 import java.time.Duration;
 import java.util.List;
@@ -23,11 +25,13 @@ public class testCase extends CommonPageObject {
 
     public WebDriver  edriver;
     public WebDriverWait ewait;
+    DataField dataField;
 
     public testCase() throws Exception {
         super(CommonPageObject.edriver);
         edriver = CommonPageObject.edriver;
         ewait = CommonPageObject.ewait;
+        dataField = new DataField("src/main/resources/data.xlsx");
     }
 
 
@@ -63,13 +67,26 @@ public class testCase extends CommonPageObject {
 
 //        Test case 5
         Thread.sleep(2000);
+//        close size XL
         clickButton(typeButton,1);
+        System.out.println();
+        clickButton(typeButtons.get(3),1);
         Thread.sleep(2000);
+//        choise all size
+        System.out.println(numberProduct.getText());
         for (int i = 0; i<typeButtons.toArray().length;i++){
             waitUntilElementVisible(typeButtons.get(i));
             waitUntilElementClickable(typeButtons.get(i));
             clickButton(typeButtons.get(i),1);
+            waitUntilInvisibilityOfElementLocated();
         }
+
+
+//        System.out.println("Số lượng sản phẩm cần check"dataField.getData(0,1));x
+//        System.out.println("Số lượng sản phẩm sau khi chọn tất cả size:"+numberProduct.getText());
+//        Assert.assertEquals(dataField.getData(0,3),numberProduct.getText());
+
+
     }
 
     @After

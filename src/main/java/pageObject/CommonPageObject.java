@@ -34,6 +34,8 @@ public class CommonPageObject {
 
     @FindBy(how = How.XPATH, using = "//span[@class=\"checkmark\"]")
     public List<WebElement> typeButtons;
+    @FindBy(how = How.XPATH, using = " //main[@class=\"sc-ebmerl-4 iliWeY\"]/p")
+    public WebElement numberProduct;
 
     public CommonPageObject(WebDriver driver) throws Exception {
         edriver = new ChromeDriver();
