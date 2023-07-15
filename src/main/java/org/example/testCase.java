@@ -63,10 +63,12 @@ public class testCase extends CommonPageObject {
 
 //        Test case 5
         Thread.sleep(2000);
+        clickButton(typeButton,1);
+        Thread.sleep(2000);
         for (int i = 0; i<typeButtons.toArray().length;i++){
             waitUntilElementVisible(typeButtons.get(i));
-            waitUntilElementClickable(closeButton);
-            clickButton(closeButton,1);
+            waitUntilElementClickable(typeButtons.get(i));
+            clickButton(typeButtons.get(i),1);
         }
     }
 
