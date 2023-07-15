@@ -32,6 +32,9 @@ public class CommonPageObject {
     @FindBy(how = How.XPATH, using = "//button[@class='sc-11uohgb-5 gBQuHE']")
     public WebElement DeleteAll;
 
+    @FindBy(how = How.XPATH, using = "//span[@class=\"checkmark\"]")
+    public List<WebElement> typeButtons;
+
     public CommonPageObject(WebDriver driver) throws Exception {
         edriver = new ChromeDriver();
         PageFactory.initElements(edriver, this);

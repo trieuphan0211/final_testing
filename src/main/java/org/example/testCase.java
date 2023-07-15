@@ -37,7 +37,7 @@ public class testCase extends CommonPageObject {
 //        Test case 1
         Thread.sleep(2000);
         // Chọn size S
-        clickButton(typeButton,2);
+        clickButton(typeButton,1);
         waitUntilInvisibilityOfElementLocated();
         waitUntilElementVisible(addButton);
         waitUntilElementClickable(addButton);
@@ -60,6 +60,14 @@ public class testCase extends CommonPageObject {
         waitUntilElementVisible(closeButton);
         waitUntilElementClickable(closeButton);
         clickButton(closeButton,1);
+
+//        Test case 5
+        Thread.sleep(2000);
+        for (int i = 0; i<typeButtons.toArray().length;i++){
+            waitUntilElementVisible(typeButtons.get(i));
+            waitUntilElementClickable(closeButton);
+            clickButton(closeButton,1);
+        }
     }
 
     @After
