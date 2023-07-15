@@ -1,14 +1,18 @@
 package pageObject;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class CommonPageObject {
     public static WebDriver edriver;
@@ -33,5 +37,55 @@ public class CommonPageObject {
         PageFactory.initElements(edriver, this);
         ewait = new WebDriverWait(edriver, Duration.ofSeconds(10));
         edriver.get("https://react-shopping-cart-67954.firebaseapp.com/");
+    }
+    public void clickButton(WebElement element,int number){
+        for(var i = 0; i< number;i++){
+            element.click();
+        }
+    }
+
+    public void waitUntilElementVisible(WebElement element) {
+        int tryTimes = 0;
+        while (tryTimes < 2) {
+            try {
+                ewait.until(ExpectedConditions.visibilityOf(element));
+                break;
+            } catch (StaleElementReferenceException se) {
+                tryTimes++;
+                if (tryTimes == 2)
+                    throw se;
+            }
+        }
+    }
+    public List<WebElement> lists(String XPATH){
+        return edriver.findElements(By.xpath(XPATH));
+    }
+
+    public void waitUntilElementClickable(WebElement element) throws Exception {
+        int tryTimes = 0;
+        while (tryTimes < 2) {
+            try {
+                ewait.until(ExpectedConditions.elementToBeClickable(element));
+                break;
+            } catch (StaleElementReferenceException se) {
+                tryTimes++;
+                if (tryTimes == 2)
+                    throw se;
+            }
+        }
+    }
+
+    public void waitUntilInvisibilityOfElementLocated( ) throws Exception {
+        int tryTimes = 0;
+        while (tryTimes < 2) {
+            try {
+                ewait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='sc-5z440p-0 ruYEp']")));
+                break;
+            } catch (StaleElementReferenceException se) {
+                tryTimes++;
+                if (tryTimes == 2)
+                    throw se;
+            }
+        }
     }
 }

@@ -66,56 +66,7 @@ public class testCase extends CommonPageObject {
     public void tearDown() throws InterruptedException {
     }
 
-    public void clickButton(WebElement element,int number){
-        for(var i = 0; i< number;i++){
-            element.click();
-        }
-    }
 
-    public void waitUntilElementVisible(WebElement element) {
-        int tryTimes = 0;
-        while (tryTimes < 2) {
-            try {
-                ewait.until(ExpectedConditions.visibilityOf(element));
-                break;
-            } catch (StaleElementReferenceException se) {
-                tryTimes++;
-                if (tryTimes == 2)
-                    throw se;
-            }
-        }
-    }
-    public List<WebElement> lists(String XPATH){
-        return edriver.findElements(By.xpath(XPATH));
-    }
-
-    public void waitUntilElementClickable(WebElement element) throws Exception {
-        int tryTimes = 0;
-        while (tryTimes < 2) {
-            try {
-                ewait.until(ExpectedConditions.elementToBeClickable(element));
-                break;
-            } catch (StaleElementReferenceException se) {
-                tryTimes++;
-                if (tryTimes == 2)
-                    throw se;
-            }
-        }
-    }
-
-    public void waitUntilInvisibilityOfElementLocated( ) throws Exception {
-        int tryTimes = 0;
-        while (tryTimes < 2) {
-            try {
-                ewait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='sc-5z440p-0 ruYEp']")));
-                break;
-            } catch (StaleElementReferenceException se) {
-                tryTimes++;
-                if (tryTimes == 2)
-                    throw se;
-            }
-        }
-    }
 
 
 }
