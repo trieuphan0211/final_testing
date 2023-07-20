@@ -19,8 +19,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObject.CommonPageObject;
 import pageObject.DataField;
 
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
 
 public class testCase extends CommonPageObject {
 
@@ -46,14 +48,18 @@ public class testCase extends CommonPageObject {
         waitUntilInvisibilityOfElementLocated();
         waitUntilElementVisible(addButton);
         waitUntilElementClickable(addButton);
+        System.out.println("Add XS");
         Thread.sleep(1000);
         // Add sản phẩm đầu tiên
         clickButton(addButton,1);
+        System.out.println("Add áo XS");
 
         Thread.sleep(3000);
         waitUntilElementVisible(CheckOut);
         waitUntilElementClickable(CheckOut);
         clickButton(CheckOut,1);
+        System.out.println("Check out");
+
 
         Thread.sleep(2000);
         // accepting javascript alert
@@ -72,53 +78,84 @@ public class testCase extends CommonPageObject {
         System.out.println("Delete XL");
         waitUntilInvisibilityOfElementLocated();
 
-        //ADDML
+        // Add ML
         clickButton(typeButtons.get(3), 1);
         System.out.println("Add ML");
         waitUntilInvisibilityOfElementLocated();
 
-        // ADD áo ML
+        // Add áo ML
         clickButton(AddML, 1);
         System.out.println("Add ao ML");
         waitUntilInvisibilityOfElementLocated();
         Thread.sleep(2000);
-        // add số lượng
+        // Add số lượng
         waitUntilElementVisible(typeButtonAdds.get(3));
         waitUntilElementClickable(typeButtonAdds.get(3));
         clickButton(typeButtonAdds.get(3),1);
         System.out.println("Add So luong");
 
-        //lay so luong
-        System.out.println("kiem tra tong tien");
-        checkGiatri(Tongsp, soluong, Giatri);
-//        Test case 4
+        // Lấy số lượng
+        System.out.println("Kiem tra tong tien");
+        checkGiaTri(Tongsp, soluong, Giatri);
+
+//        Test case 3
+        //  Xóa tất cả sản phẩm bên trong giỏ hàng
+        Thread.sleep(1000);
+        waitUntilElementVisible(DeleteAll);
+        waitUntilElementClickable(DeleteAll);
+        Thread.sleep(1000);
+        clickButton(DeleteAll,2);
+
+        // Check out khi không có sản phẩm
+        Thread.sleep(3000);
+        waitUntilElementVisible(CheckOut);
+        waitUntilElementClickable(CheckOut);
+        clickButton(CheckOut,1);
+        System.out.println("Check out");
+
         Thread.sleep(2000);
-//        close size XL
-//        clickButton(typeButton,1);
-//        waitUntilInvisibilityOfElementLocated();
+        // accepting javascript alert
+        Alert alert2 = edriver.switchTo().alert();
+        alert2.accept();
+
+        // Check total = 0
+        System.out.println("Số tiền cần kiểm tra: "+dataField.getData(1,1));
+        // System.out.println(1*1.12);
+        System.out.println("Số tiền kiểm tra: "+Total.getText());
+        try{
+            Assert.assertEquals(dataField.getData(1,1).trim(),Total.getText().trim());
+            System.out.println("Đúng, số tiền cần kiểm tra bằng với số tiền kiểm tra");
+
+        }catch (Exception err) {
+            System.out.println("Sai, số tiền cần kiểm tra khác với số tiên kiểm tra");
+        }
+
         edriver.navigate().refresh();
         waitUntilInvisibilityOfElementLocated();
-//        Chọn Size L
+
+//        Test case 4
+        Thread.sleep(2000);
+        // Chọn Size L
         Thread.sleep(3000);
-        System.out.println("chọn Size L");
+        System.out.println("Chọn Size L");
         waitUntilElementVisible(typeButtons.get(4));
         waitUntilElementClickable(typeButtons.get(4));
         clickButton(typeButtons.get(4),1);
         waitUntilInvisibilityOfElementLocated();
-//        add 2 product
+        // Add 2 products
         waitUntilElementVisible(addProducts.get(0));
         waitUntilElementClickable(addProducts.get(0));
         clickButton(addProducts.get(0),1);
         waitUntilElementVisible(addProducts.get(1));
         waitUntilElementClickable(addProducts.get(1));
         clickButton(addProducts.get(1),1);
-        checkcartSubtotal(subTotal,coin,numberCoin,2);
+        checkCartSubTotal(subTotal,coin,numberCoin,2);
         clickButton(typeButtons.get(4),1);
         waitUntilInvisibilityOfElementLocated();
 //        Test case 5
 
         Thread.sleep(2000);
-//        choise all size
+        // Choice all size
         System.out.println(numberProduct.getText());
         for (int i = 0; i<typeButtons.toArray().length;i++){
             waitUntilElementVisible(typeButtons.get(i));
@@ -127,9 +164,8 @@ public class testCase extends CommonPageObject {
             waitUntilInvisibilityOfElementLocated();
         }
 
-
         System.out.println("Số lượng sản phẩm cần check: "+dataField.getData(0,1));
-        System.out.println(1*1.12);
+        // System.out.println(1*1.12);
         System.out.println("Số lượng sản phẩm sau khi chọn tất cả size: "+numberProduct.getText());
         try {
             Assert.assertEquals(dataField.getData(0,1),numberProduct.getText());
@@ -137,18 +173,11 @@ public class testCase extends CommonPageObject {
         }catch(Exception err) {
             System.out.println("Sai, số lượng sản phẩm không đúng khi chọn tất cả các size");
         }
-
-
-
-
     }
 
     @After
     public void tearDown() throws InterruptedException {
     }
-
-
-
 
 }
 

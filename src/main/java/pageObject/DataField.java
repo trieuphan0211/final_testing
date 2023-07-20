@@ -30,6 +30,11 @@ public class DataField {
         return sheet.getRow(row).getCell(column).getStringCellValue();
     }
 
+    public double getNumberData(int row, int column) {
+        sheet = work_book.getSheetAt(0);
+        return sheet.getRow(row).getCell(column).getNumericCellValue();
+    }
+
     public int getRowCount(int sheetIndex) {
         int row = work_book.getSheetAt(sheetIndex).getLastRowNum();
         row = row + 1;

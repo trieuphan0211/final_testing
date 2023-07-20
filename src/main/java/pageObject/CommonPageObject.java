@@ -24,11 +24,12 @@ public class CommonPageObject {
     public static WebDriver edriver;
     public static WebDriverWait ewait;
 
+
     @FindBy(how = How.XPATH, using = "//span[@class='checkmark']")
     public WebElement typeButton;
     @FindBy(how = How.XPATH, using = "//button[@class='sc-124al1g-0 jCsgpZ']")
     public WebElement addButton ;
-//    Add sản phẩm bên trong giỏ hàng
+    // Add sản phẩm bên trong giỏ hàng
     @FindBy(how = How.XPATH, using = "//button[@class='sc-11uohgb-6 cgtUCJ'][2]")
     public WebElement addItem ;
     @FindBy(how = How.XPATH, using = "//button[@class='sc-1h98xa9-0 gFkyvN']")
@@ -38,6 +39,9 @@ public class CommonPageObject {
     @FindBy(how = How.XPATH, using = "//button[@class='sc-11uohgb-5 gBQuHE']")
     public WebElement DeleteAll;
 
+    // Check Total
+    @FindBy(how = How.XPATH, using = "//div[@class='sc-1h98xa9-8 bciIxg']//p[@class='sc-1h98xa9-9 jzywDV']")
+    public WebElement Total;
 
     @FindBy(how = How.XPATH, using = "//span[@class='checkmark']")
     public WebElement DeleteXl;
@@ -64,12 +68,6 @@ public class CommonPageObject {
 
     @FindBy(how = How.XPATH, using = "//p[@class='sc-1h98xa9-9 jzywDV']")
     public WebElement Tongsp;
-
-
-
-
-
-
 
 
     @FindBy(how = How.XPATH, using = "//button[@class='sc-124al1g-0 jCsgpZ']")
@@ -138,7 +136,8 @@ public class CommonPageObject {
             }
         }
     }
-    public void checkGiatri(WebElement tong , List<WebElement> soluong , List<WebElement> Giatri) {
+
+    public void checkGiaTri(WebElement tong , List<WebElement> soluong , List<WebElement> Giatri) {
         Float tongs = Float.parseFloat(tong.getText().replace("$ ",""));
         ArrayList<Float> soluongs = new ArrayList<Float>();
         ArrayList<Float> Giatris = new ArrayList<Float>();
@@ -154,10 +153,10 @@ public class CommonPageObject {
         }
 
     }
-    public void checkcartSubtotal (WebElement total,List<WebElement> coin,List<WebElement> numberCoin, int number){
+    public void checkCartSubTotal (WebElement total,List<WebElement> coin,List<WebElement> numberCoin, int number){
         System.out.println("Check value:");
         DecimalFormat df = new DecimalFormat("#");
-       String[] arr =  total.getText().replace("OR UP TO ","").replace("x $ ","").split(" ");
+        String[] arr =  total.getText().replace("OR UP TO ","").replace("x $ ","").split(" ");
         Float subTotal = Integer.parseInt(arr[0]) * Float.parseFloat(arr[1]);
         ArrayList<Float> totalItem = new ArrayList<Float>();
         for (int i = 0;i<number;i++){
